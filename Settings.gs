@@ -5,6 +5,9 @@
 const navigationLinks = [
   NavigationLink.internal("iOS", "iOS"),
   NavigationLink.external("https://blog.zhgchg.li", "_blank", "Tech Blog"),
+  NavigationLink.external("https://dev.zhgchg.li/ci-cd-%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97-%E4%B8%80-ci-cd-%E6%98%AF%E4%BB%80%E9%BA%BC-%E5%A6%82%E4%BD%95%E9%80%8F%E9%81%8E-ci-cd-%E6%89%93%E9%80%A0%E7%A9%A9%E5%AE%9A%E9%AB%98%E6%95%88%E7%9A%84%E9%96%8B%E7%99%BC%E5%9C%98%E9%9A%8A-%E5%B7%A5%E5%85%B7%E9%81%B8%E6%93%87-c008a9e8ceca", "_blank", "CI/CD 系列文章"),
+  NavigationLink.external("https://github.com/ZhgChgLi/github-actions-ci-cd-demo", "_blank", "GitHub Actions Demo Repo"),
+  NavigationLink.external("https://script.google.com/home/projects/1CBB39OMedqP9Ro1WSlvgDnMBin4-ksyhgly2h_KrbOuFiPHTalNgwHOp/edit", "_blank", "GAS Web App Source Code")
 ];
 
 // 底部版權訊息，可隨意更改
