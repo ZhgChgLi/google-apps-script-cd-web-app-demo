@@ -1,0 +1,159 @@
+<h1>iOS 打包工具</h1>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="tab-runs-tab" data-bs-toggle="tab" href="#tab-runs" onclick="loadRuns();" role="tab" aria-controls="tab-runs" aria-selected="true">
+          <i class="bi bi-list-columns"></i> 打包紀錄
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="tab-form-tab" data-bs-toggle="tab" href="#tab-form" onclick="loadForm();" role="tab" aria-controls="tab-form" aria-selected="false">
+          <i class="bi bi-wrench-adjustable-circle"></i> 打包表單
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="tab-runners-tab" data-bs-toggle="tab" href="#tab-runners" onclick="loadRunner();" role="tab" aria-controls="tab-runners" aria-selected="false">
+          <i class="bi bi-hdd-rack"></i> Runner 狀態
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body tab-content">
+    <div class="tab-pane fade show active" id="tab-runs" role="tabpanel" aria-labelledby="tab-runs-tab">
+      
+    </div>
+    <div class="tab-pane fade" id="tab-form" role="tabpanel" aria-labelledby="tab-form-tab">
+      <h5 class="card-title">Tab 2: Another title</h5>
+      <p class="card-text">Content for the second tab.</p>
+      <a href="#" class="btn btn-secondary">Go somewhere else</a>
+    </div>
+    <div class="tab-pane fade" id="tab-runners" role="tabpanel" aria-labelledby="tab-runners-tab">
+      <h5 class="card-title">Tab 3: Another title</h5>
+      <p class="card-text">Content for the second tab.</p>
+      <a href="#" class="btn btn-secondary">Go somewhere else</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.addEventListener('load', function () {
+    loadRuns();
+  });
+
+  function loadRuns() {
+    showLoading("tab-runs");
+    try {
+      google.script.run.withSuccessHandler(response => {
+        document.getElementById("tab-runs").innerHTML = response;
+      }).withFailureHandler(function (error) {
+        showError(error);
+      }).iOSLoadRuns();
+    } catch (error) {
+      showError(error);
+    }
+  }
+
+  function loadForm() {
+    showLoading("tab-form");
+    try {
+      google.script.run.withSuccessHandler(response => {
+        document.getElementById("tab-form").innerHTML = response;
+      }).withFailureHandler(function (error) {
+        showError(error);
+      }).iOSLoadForm();
+    } catch (error) {
+      showError(error);
+    }
+  }
+
+  function loadRunner() {
+    showLoading("tab-runners");
+    try {
+      google.script.run.withSuccessHandler(response => {
+        document.getElementById("tab-runners").innerHTML = response;
+      }).withFailureHandler(function (error) {
+        showError(error);
+      }).iOSLoadRunner();
+    } catch (error) {
+      showError(error);
+    }
+  }
+
+  function loadFirebaseDownloadLink(run_id) {
+    document.getElementById("firebase_download_button_"+run_id).classList.add('disabled');
+    document.getElementById("firebase_download_button_"+run_id).setAttribute('aria-disabled', 'true');
+    document.getElementById("firebase_download_button_"+run_id).innerHTML = `
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      <span class="visually-hidden" role="status">Loading...</span>
+      <span role="status">Loading...</span>
+    `;
+
+    try {
+      google.script.run.withSuccessHandler(links => {
+        var html = "";
+        if (links) {
+
+          links.forEach(function(link) {
+            html += `
+              <div class="card">
+                <div class="card-header">
+                  ${link.title}
+                </div>
+                <div class="card-body">
+                  <div class="card-text">${link.note}</div>
+                  <a href="${link.url}" target="_blank" class="btn btn-primary">點此下載</a>
+                </div>
+              </div>
+            `;
+          });
+        } else {
+          html = `
+            <div class="alert alert-warning" role="alert">
+              找不到對應的 Firebase App Distribution 下載連結。
+            </div>
+          `;
+        }
+        document.getElementById("firebase_download_button_"+run_id).classList.add('d-none');
+        document.getElementById("firebase_download_info_"+run_id).classList.remove('d-none');
+        document.getElementById("firebase_download_info_"+run_id).innerHTML = html;
+      }).withFailureHandler(function (error) {
+        showError(error);
+      }).iOSLoadAppDistributionDownloadLink(run_id);
+    } catch (error) {
+      showError(error);
+    }
+  }
+
+  function submitForm(form) {
+    if(confirm("您確定要送出請求？")) {
+      const submitBtn = form.querySelector('button.btn-primary[type="button"]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span class="visually-hidden" role="status">Loading...</span>
+        <span role="status">Loading...</span>
+      `;
+      try {
+        google.script.run.withSuccessHandler(response => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "送出請求";
+          if (response.ok) {
+            showSuccess(response.message);
+          } else {
+            showError(new Error("未知的錯誤"));
+          }
+        }).withFailureHandler(function (error) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "送出請求";
+          showError(error);
+        }).iOSSubmitForm(form);
+      } catch (error) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "送出請求";
+        showError(error);
+      }
+    }
+  }
+</script>

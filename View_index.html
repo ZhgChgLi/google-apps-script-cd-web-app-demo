@@ -1,0 +1,139 @@
+<!doctype html>  
+<html lang="en">  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?=title?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+      <div class="container">
+        <a class="navbar-brand" href="<?=pageURL?>" target="_top"><?=title?></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbars" aria-controls="mainNavbars" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbars">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <? navigationLinks.forEach(function(navigationLink) { ?>
+              <? if (navigationLink.isExternal()) { ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?=navigationLink.url?>" target="<?=navigationLink.target?>"><?=navigationLink.text?></a>
+                </li>
+              <? } else { ?>
+                <li class="nav-item">
+                  <a class="nav-link <?=(navigationLink.isActive(currentPageID)) ? ("active"): ("")?>" href="<?=pageURL?>?pageID=<?=navigationLink.pageID?>" target="_top"><?=navigationLink.text?></a>
+                </li>
+              <? } ?>
+
+            <? }); ?>
+          </ul>
+          <span class="navbar-text ms-lg-auto">
+            👤 <?=userEmail?>
+          </span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-3">
+      <? if(isStubData) { ?>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>⚠️ 注意：當前為 Demo 環境</strong>，所有資料均為 Stub 模擬資料。
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <? } ?>
+      <? if(currentPageID) { ?>
+        <?!= include('View_'+currentPageID) ?>
+      <? } else { ?>
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+          <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">iOS 打包工具</h1>
+            <p class="col-md-8 fs-4">Demo 使用 Google Apps Script 串接 GitHub Actions 實現跨團隊打包平台工具。</p>
+            <a class="btn btn-primary btn-lg" href="<?=pageURL?>?pageID=iOS" target="_top">立即前往</a>
+          </div>
+        </div>
+        <div class="row align-items-md-stretch">
+          <div class="col-md-6">
+            <div class="h-100 p-5 text-bg-dark rounded-3">
+              <h2>技術細節- CI/CD 實戰指南 系列文章</h2>
+              <p><a class="link-light" href="https://dev.zhgchg.li/ci-cd-%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97-%E4%B8%80-ci-cd-%E6%98%AF%E4%BB%80%E9%BA%BC-%E5%A6%82%E4%BD%95%E9%80%8F%E9%81%8E-ci-cd-%E6%89%93%E9%80%A0%E7%A9%A9%E5%AE%9A%E9%AB%98%E6%95%88%E7%9A%84%E9%96%8B%E7%99%BC%E5%9C%98%E9%9A%8A-%E5%B7%A5%E5%85%B7%E9%81%B8%E6%93%87-c008a9e8ceca" target="_blank">CI/CD 實戰指南（一）：CI/CD 是什麼？如何透過 CI/CD 打造穩定高效的開發團隊？工具選擇？</a></p>
+              <p><a class="link-light" href="https://dev.zhgchg.li/ci-cd-%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97-%E4%BA%8C-github-actions-%E8%88%87-self-hosted-runner-%E4%BD%BF%E7%94%A8%E8%88%87%E5%BB%BA%E7%BD%AE%E5%A4%A7%E5%85%A8-404bd5c70040" target="_blank">CI/CD 實戰指南（二）：GitHub Actions 與 self-hosted Runner 使用與建置大全</a></p>
+              <p><a class="link-light" href="https://dev.zhgchg.li/ci-cd-%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97-%E4%B8%89-%E4%BD%BF%E7%94%A8-github-actions-%E5%AF%A6%E4%BD%9C-app-ios-ci-%E8%88%87-cd-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B-4b001d2e8440" target="_blank">CI/CD 實戰指南（三）：使用 GitHub Actions 實作 App 專案的 CI 與 CD 工作流程</a></p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+              <h2>ZhgChgLi/github-actions-ci-cd-demo</h2>
+              <p>A demo repository showcasing a complete CI/CD pipeline setup for modern app development using GitHub Actions. This project illustrates best practices for automated testing, building, and deployment, and can be used as a starting point or reference for integrating GitHub Actions into your own mobile or web app projects.</p>
+              <a class="btn btn-outline-secondary" href="https://github.com/ZhgChgLi/github-actions-ci-cd-demo" target="_blank">前往查看</a>
+            </div>
+          </div>
+        </div>
+      <? } ?>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="alertModalLabel">系統提示</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="alertModalContent"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">關閉</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+          <span class="mb-3 mb-md-0 text-body-secondary"><?!=footerMessage?></span>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+
+    <script>
+      function showLoading(id) {
+        document.getElementById(id).innerHTML = `
+          <div class="d-flex justify-content-center m-5">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        `;
+      }
+
+      function show(title, html) {
+        document.getElementById("alertModalLabel").innerHTML = title;
+        document.getElementById("alertModalContent").innerHTML = html;
+        const alert = new bootstrap.Modal(document.getElementById('alertModal'));
+        alert.show();
+      }
+
+      function showError(error) {
+        let errorHTML = `
+          <div class="alert alert-danger" role="alert">
+            <p class="mb-0">${error.message}</p>
+          </div>
+        `
+        show("發生錯誤!", errorHTML);
+      }
+
+      function showSuccess(message) {
+        let html = `
+          <div class="alert alert-success" role="alert">
+            <p class="mb-0">${message}</p>
+          </div>
+        `
+        show("執行成功!", html);
+      }
+    </script>
+  </body>  
+</html>

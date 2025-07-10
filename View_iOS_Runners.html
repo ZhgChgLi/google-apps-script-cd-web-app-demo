@@ -1,0 +1,33 @@
+<figure class="text-end m-3">
+  <figcaption class="blockquote-footer">
+    Loaded at: <?=loadedTime?>
+  </figcaption>
+</figure>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <? runners.forEach(function(runner) { 
+    let colorClass = (runner.status === "offline") 
+      ? "secondary" 
+      : (runner.busy ? "primary" : "success");
+
+    let statusText = (runner.status === "offline")
+      ? "離線中"
+      : (runner.busy ? "忙碌中" : "空閒");
+  ?>
+    <div class="col">
+      <div class="card border-dark mb-3 h-100">
+        <div class="card-header"><?= runner.name ?></div>
+        <div class="card-body text-dark">
+          <h5 class="card-title"><span class="badge text-bg-<?=colorClass?>"><?= statusText ?></span></h5>
+          <p class="card-text">
+            <strong>OS:</strong> <?= runner.os ?> <br/>
+            <strong>Labels:</strong>
+            <?!= runner.labels.map(label =>
+              `<span class="badge text-bg-light">${label.name}</span>`
+            ).join(' ') ?>
+          </p>
+        </div>
+      </div>
+    </div>
+  <? }) ?>
+</div>

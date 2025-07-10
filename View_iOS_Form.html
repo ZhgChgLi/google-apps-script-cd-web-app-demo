@@ -1,0 +1,32 @@
+<form class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto p-4">
+  <div class="mb-3">
+    <label for="formBranch" class="form-label">目標分支</label>
+    <input class="form-control" list="formBranchDatalistOptions" id="formBranch" name="branch" value="main" placeholder="Type to search...">
+    <datalist id="formBranchDatalistOptions">
+      <option value="main">main</option>
+      <? prs.forEach(function(pr) { ?>
+      <option value="<?=pr.head.ref?>">[PR-<?=pr.number?>] <?=pr.title?></option>
+      <? }) ?>
+      <? tasks.forEach(function(task) { ?>
+      <option value="<?=task.githubBranch?>">[<?=task.id?>] <?=task.title?></option>
+      <? }) ?>
+    </datalist>
+  </div>
+  <div class="mb-3">
+    <label for="formBranchVersionNumber" class="form-label">版本號</label>
+    <input type="text" class="form-control" id="formBranchVersionNumber" name="versionNumber" placeholder="e.g. 1.0.0，留空將自動偵測">
+  </div>
+  <div class="mb-3">
+    <label for="formBranchBuildNumber" class="form-label">建置號</label>
+    <input type="text" class="form-control" id="formBranchBuildNumber" name="buildNumber" placeholder="e.g. 20250718，留空將自動使用時間戳">
+  </div>
+  <div class="mb-3">
+    <label for="formBranchNote" class="form-label">Release Note</label>
+    <textarea class="form-control" id="formBranchNote" rows="5" name="releaseNote"></textarea>
+  </div>
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="switchCheckCheckedDisabled" checked disabled>
+    <label class="form-check-label" for="switchCheckCheckedDisabled">Debug 版</label>
+  </div>
+  <button type="button" class="btn btn-primary w-100" onclick="submitForm(this.form);">送出請求</button>
+</form>
