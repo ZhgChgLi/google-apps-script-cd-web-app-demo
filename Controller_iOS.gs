@@ -1,3 +1,4 @@
+// Controller_iOS.gs
 // iOS 頁面邏輯處理相關方法
 // 對應 View_iOS.html 中 JS 的呼叫 google.script.run.withSuccessHandler().XXX
 

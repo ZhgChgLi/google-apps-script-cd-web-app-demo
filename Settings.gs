@@ -1,3 +1,4 @@
+// Settings.gs
 // 設定網頁上方導航列超連結
 // Internal Link: pageID, Text
 //   pageID 會對應檔案 View_pageID.html

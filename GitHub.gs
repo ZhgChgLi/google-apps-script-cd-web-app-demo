@@ -1,3 +1,4 @@
+// GitHub.gs
 // GitHub 服務相關操作方法
 class GitHub {
   constructor(token, repoPath) {

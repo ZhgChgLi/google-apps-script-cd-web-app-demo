@@ -1,3 +1,4 @@
+// NavigationLink.gs
 // 定義網頁上方導航連結物件結構
 class NavigationLink {
   constructor(type, options) {

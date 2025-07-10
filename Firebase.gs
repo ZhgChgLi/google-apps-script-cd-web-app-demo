@@ -1,3 +1,4 @@
+// Firebase.gs
 // Firebase 服務相關操作方法
 class Firebase {
   constructor(project) {
@@ -8,7 +9,10 @@ class Firebase {
   // 需要先到專案設定 -> Google Cloud Platform (GCP) 專案 綁定對應的 Firebase GCP Project 才能使用
   // 需要先到專案設定 -> Google Cloud Platform (GCP) 專案 綁定對應的 Firebase GCP Project 才能使用
   // 需要先到專案設定 -> Google Cloud Platform (GCP) 專案 綁定對應的 Firebase GCP Project 才能使用
-  // Token 權限是看當前使用者本身，當前登入的使用者要有對應的 Firebase Project 權限
+  // Token 權限：
+  // 部署的執行身份是存取網頁的使用者的話：看當前使用者本身，當前登入的使用者要有對應的 Firebase Project 權限
+  // 部署的執行身份是我的話：看部署腳本的人本身，要有對應的 Firebase Project 權限
+  
   fetchAppDistributionDownloadLink(run_id) {
     const baseUrl = `https://firebaseappdistribution.googleapis.com/v1/${this.project}/releases`;
     const filter = encodeURIComponent(`releaseNotes.text=*${run_id}*`);

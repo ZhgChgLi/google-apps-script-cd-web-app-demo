@@ -1,3 +1,4 @@
+// Credentials.gs
 // Slack Bot Token，用來反查 Email 對應的 Slack UID (需要 https://api.slack.com/scopes/users:read.email 權限)
 // 或也可以發送通知訊息
 const slackBotToken = "xoxb---";

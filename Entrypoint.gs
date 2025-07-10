@@ -1,3 +1,4 @@
+// Entrypoint.gs
 // doGet() Web 進入點
 function doGet(e) {  
   const template = HtmlService.createTemplateFromFile('View_index');
