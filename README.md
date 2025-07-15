@@ -26,3 +26,9 @@ This demo connects GitHub Actions workflows and Firebase App Distribution to del
 
 ### Related Repo
 - https://github.com/ZhgChgLi/github-actions-ci-cd-demo
+
+## Buy me a coffee
+
+[![Buy Me A Coffe](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20beer!&emoji=%F0%9F%8D%BA&slug=zhgchgli&button_colour=FFDD00&font_colour=000000&font_family=Bree&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/zhgchgli)
+
+> This series of articles took a significant amount of time and effort to write. If the content has helped you or your team improve work efficiency and product quality, feel free to buy me a coffee as a token of appreciation!
